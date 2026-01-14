@@ -1,0 +1,16 @@
+[
+  {
+    "before_code": "def calculate_final_price(base_price, is_member):\n    discount = 0\n    if is_member:\n        discount = base_price * 0.1\n    \n    price_after_discount = base_price - discount\n    tax = price_after_discount * 0.08\n    final_price = price_after_discount + tax\n    return final_price",
+    "after_code": "def calculate_discount(base_price, is_member):\n    if is_member:\n        return base_price * 0.1\n    return 0\n\ndef calculate_final_price(base_price, is_member):\n    discount = calculate_discount(base_price, is_member)\n    price_after_discount = base_price - discount\n    tax = price_after_discount * 0.08\n    final_price = price_after_discount + tax\n    return final_price",
+    "explanation": "The specific logic for calculating a discount was extracted from the main calculation flow into a new function 'calculate_discount'. This isolates a distinct piece of business logic.",
+    "refactor_type": "Extract Method",
+    "language": "python"
+  },
+  {
+    "before_code": "def has_admin_privileges(user):\n    return user.role == 'ADMIN'\n\ndef can_delete_document(user):\n    if has_admin_privileges(user):\n        return True\n    return False",
+    "after_code": "def can_delete_document(user):\n    if user.role == 'ADMIN':\n        return True\n    return False",
+    "explanation": "This is an Inline Method refactoring, the reverse of Extract Method. The body of 'has_admin_privileges' was moved into its caller and the original function was removed.",
+    "refactor_type": "Inline Method",
+    "language": "python"
+  }
+]

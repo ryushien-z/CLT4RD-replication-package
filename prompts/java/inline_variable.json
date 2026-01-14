@@ -1,0 +1,16 @@
+[
+	{
+		"before_code": "class EligibilityService {\n    public String isEligible(int userAge) {\n        boolean isAdult = userAge >= 18;\n        if (isAdult) {\n            return \"Eligible\";\n        } else {\n            return \"Not Eligible\";\n        }\n    }\n}",
+		"after_code": "class EligibilityService {\n    public String isEligible(int userAge) {\n        if (userAge >= 18) {\n            return \"Eligible\";\n        } else {\n            return \"Not Eligible\";\n        }\n    }\n}",
+		"explanation": "This is an Inline Variable refactoring, the temporary variable 'isAdult' was only used once. Its expression (userAge >= 18) was moved directly into the 'if' statement, and the variable was removed.",
+		"refactor_type": "Inline Variable",
+		"language": "java"
+	},
+	{
+		"before_code": "class PermissionService {\n    public boolean hasAdminPrivileges(String role) {\n        return \"ADMIN\".equals(role);\n    }\n\n    public boolean canDeleteDocument(String role) {\n        return hasAdminPrivileges(role);\n    }\n}",
+		"after_code": "class PermissionService {\n    public boolean canDeleteDocument(String role) {\n        return \"ADMIN\".equals(role);\n    }\n}",
+		"explanation": "This is an Inline Method refactoring, the reverse of Extract Method. The body of 'hasAdminPrivileges' was moved into its caller and the original method was removed.",
+		"refactor_type": "Inline Method",
+		"language": "java"
+	}
+]

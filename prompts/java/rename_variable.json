@@ -1,0 +1,16 @@
+[
+	{
+		"before_code": "class BillingService {\n    public double calculateTotal(double[] prices) {\n        double val = 0;\n        for (double price : prices) {\n            val += price;\n        }\n        return val;\n    }\n}",
+		"after_code": "class BillingService {\n    public double calculateTotal(double[] prices) {\n        double totalPrice = 0;\n        for (double price : prices) {\n            totalPrice += price;\n        }\n        return totalPrice;\n    }\n}",
+		"explanation": "The variable 'val' was renamed to 'totalPrice'. The new name is more descriptive and clearly communicates the variable's purpose, which improves readability.",
+		"refactor_type": "Rename Variable",
+		"language": "java"
+	},
+	{
+		"before_code": "class PriceCalculator {\n    public double calculateFinalPrice(double basePrice, boolean isMember) {\n        double discount = 0;\n        if (isMember) {\n            discount = basePrice * 0.1;\n        }\n        \n        double priceAfterDiscount = basePrice - discount;\n        double tax = priceAfterDiscount * 0.08;\n        double finalPrice = priceAfterDiscount + tax;\n        return finalPrice;\n    }\n}",
+		"after_code": "class PriceCalculator {\n    private double calculateDiscount(double basePrice, boolean isMember) {\n        if (isMember) {\n            return basePrice * 0.1;\n        }\n        return 0;\n    }\n\n    public double calculateFinalPrice(double basePrice, boolean isMember) {\n        double discount = calculateDiscount(basePrice, isMember);\n        double priceAfterDiscount = basePrice - discount;\n        double tax = priceAfterDiscount * 0.08;\n        double finalPrice = priceAfterDiscount + tax;\n        return finalPrice;\n    }\n}",
+		"explanation": "The specific logic for calculating a discount was extracted from the main calculation flow into a new method 'calculateDiscount'. This isolates a distinct piece of business logic.",
+		"refactor_type": "Extract Method",
+		"language": "java"
+	}
+]

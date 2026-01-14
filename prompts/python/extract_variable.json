@@ -1,0 +1,16 @@
+[
+  {
+    "before_code": "def get_total_price(order):\n    base_price = order.quantity * order.item_price\n    return base_price - max(0, order.quantity - 500) * order.item_price * 0.05",
+    "after_code": "def get_total_price(order):\n    base_price = order.quantity * order.item_price\n    quantity_discount = max(0, order.quantity - 500) * order.item_price * 0.05\n    return base_price - quantity_discount",
+    "explanation": "The complex expression used to calculate the 'quantity_discount' was extracted into its own variable, making the final 'return' statement easier to read.",
+    "refactor_type": "Extract Variable",
+    "language": "python"
+  },
+  {
+    "before_code": "def is_eligible(user_age):\n    is_adult = user_age >= 18\n    if is_adult:\n        return \"Eligible\"\n    else:\n        return \"Not Eligible\"",
+    "after_code": "def is_eligible(user_age):\n    if user_age >= 18:\n        return \"Eligible\"\n    else:\n        return \"Not Eligible\"",
+    "explanation": "The temporary variable 'is_adult' was only used once. Its expression (user_age >= 18) was moved directly into the 'if' statement, and the variable was removed.",
+    "refactor_type": "Inline Variable",
+    "language": "python"
+  }
+]

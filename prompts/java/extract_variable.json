@@ -1,0 +1,16 @@
+[
+	{
+		"before_code": "class PriceCalculator {\n    public double getTotalPrice(int quantity, double itemPrice) {\n        double basePrice = quantity * itemPrice;\n        return basePrice - Math.max(0, quantity - 500) * itemPrice * 0.05;\n    }\n}",
+		"after_code": "class PriceCalculator {\n    public double getTotalPrice(int quantity, double itemPrice) {\n        double basePrice = quantity * itemPrice;\n        double quantityDiscount = Math.max(0, quantity - 500) * itemPrice * 0.05;\n        return basePrice - quantityDiscount;\n    }\n}",
+		"explanation": "The complex expression used to calculate the 'quantityDiscount' was extracted into its own variable, making the final 'return' statement easier to read.",
+		"refactor_type": "Extract Variable",
+		"language": "java"
+	},
+	{
+		"before_code": "class EligibilityService {\n    public String isEligible(int userAge) {\n        boolean isAdult = userAge >= 18;\n        if (isAdult) {\n            return \"Eligible\";\n        } else {\n            return \"Not Eligible\";\n        }\n    }\n}",
+		"after_code": "class EligibilityService {\n    public String isEligible(int userAge) {\n        if (userAge >= 18) {\n            return \"Eligible\";\n        } else {\n            return \"Not Eligible\";\n        }\n    }\n}",
+		"explanation": "The temporary variable 'isAdult' was only used once. Its expression (userAge >= 18) was moved directly into the 'if' statement, and the variable was removed.",
+		"refactor_type": "Inline Variable",
+		"language": "java"
+	}
+]
